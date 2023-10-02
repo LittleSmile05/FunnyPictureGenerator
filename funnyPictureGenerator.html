@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Picture Generator</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: rgb(255, 255, 255);
+            font-size: 24px;
+        }
+
+        img {
+            max-width: 100%;
+            border: 5px solid white;
+            height: auto;
+        }
+
+        #komikResim {
+            width: 400px;
+        }
+        button{
+            border: none;
+            height: 40px;
+            font-size: 20px;
+            font-family:'Times New Roman', Times, serif;
+            background-color: white; font-family:'Times New Roman', Times, serif; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        button:hover{
+            box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.5), 0 6px 20px 0 rgba(255, 255, 255, 0.4);
+        }
+        input{
+            border: none;
+            width: 200px;
+            height: 40px;
+            font-size: 20px;
+        }
+        input{
+            font-family:'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Funny picture Generator</h1>
+
+        <button id="click" onclick="generateRandomFunnyImage()">Click to Change Image</button>
+        <input id="text1" type="text" placeholder="Write Your Text:) ">
+        
+
+        <img id="komikResim" src="" alt="Komik Resim">
+        <p id="t1" style="color: white; font-size: 40px;"></p>
+    </div>
+
+    <script>
+    const komikResim = document.getElementById("komikResim");
+    const text1 = document.getElementById("text1");
+    const t1 = document.getElementById("t1");
+
+    function generateRandomFunnyImage() {
+        fetch('https://source.unsplash.com/featured/?funny')
+            .then(response => {
+                komikResim.src = response.url;
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+            });
+
+        // Update the text below the image with the value from the input field
+        t1.textContent = text1.value;
+    }
+    generateRandomFunnyImage();
+
+    text1.addEventListener("input", () => {
+        // Update the text below the image in real-time as the user types
+        t1.textContent = text1.value;
+    });
+</script>
+
+</body>
+</html>
